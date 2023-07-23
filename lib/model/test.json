@@ -1,0 +1,27 @@
+{
+    "listGroup": [
+        {
+            "id_group": "p9d23hnd2323dwd8ny292",
+            "listObject": [
+                {
+                    "type": "circular",
+                    "direction": "right",
+                    "lat": 47.215762,
+                    "lon": 39.758243,
+                    "id_object": "sad328923dfdgfhds893283",
+                    "radius_object": 2312.673,
+                    "name": "КЛ43 М.А."
+                },
+                {
+                    "type": "circular",
+                    "direction": "left",
+                    "lat": 47.216229,
+                    "lon": 39.771555,
+                    "id_object": "b79dsb8f72f",
+                    "radius_object": 1421.673,
+                    "name": "12GP-SU"
+                }
+            ]
+        }
+    ]
+}
