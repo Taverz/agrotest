@@ -125,8 +125,32 @@ class PageGroupMap extends StatelessWidget {
     //TODO: algoritm search 2 object other corner
     final MapGroupObject elem1 = groupObj.listObject!.last;
     final MapGroupObject elem2 = groupObj.listObject!.first;
-    final latLng_Corner1 = LatLng(elem1.lat, elem1.lon);
-    final latLng_Corner2 = LatLng(elem2.lat, elem2.lon);
+    double max = 0.0;
+    double min = 0.0;
+    LatLng? maxL;
+    LatLng? minL;
+    groupObj.listObject!.forEach((element) {
+      if(element.lat > max){
+        max = element.lat;
+        maxL = LatLng(element.lat, element.lon);
+      } 
+      if(element.lon > max){
+        max = element.lon;
+        maxL = LatLng(element.lat, element.lon);
+      }
+      if(element.lat < min){
+        min = element.lat;
+        minL = LatLng(element.lat, element.lon);
+      }
+      if(element.lon < min){
+        min = element.lat;
+        minL = LatLng(element.lat, element.lon);
+      }
+    });
+    var latLng_Corner1 = LatLng(elem1.lat, elem1.lon);
+    var latLng_Corner2 = LatLng(elem2.lat, elem2.lon);
+    latLng_Corner1 = maxL!;
+    latLng_Corner2 = minL!;
 
     return (latLng_Corner1, latLng_Corner2);
   }
