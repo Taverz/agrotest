@@ -122,35 +122,30 @@ class PageGroupMap extends StatelessWidget {
 
   /// Узнать крайние обьекты
   (LatLng, LatLng) _getCornerViaDistance() {
-    //TODO: algoritm search 2 object other corner
-    final MapGroupObject elem1 = groupObj.listObject!.last;
-    final MapGroupObject elem2 = groupObj.listObject!.first;
-    double max = 0.0;
-    double min = 0.0;
-    LatLng? maxL;
-    LatLng? minL;
+    // algoritm search 2 object other corner
+    double maxLat = -90.0;
+    double minLat = 90.0;
+    double maxLon = -180.0;
+    double minLon = 180.0;
     groupObj.listObject!.forEach((element) {
-      if(element.lat > max){
-        max = element.lat;
-        maxL = LatLng(element.lat, element.lon);
-      } 
-      if(element.lon > max){
-        max = element.lon;
-        maxL = LatLng(element.lat, element.lon);
+      var lat = element.lat;
+      var lon = element.lon;
+      if(lat < minLat){
+        minLat = lat;
       }
-      if(element.lat < min){
-        min = element.lat;
-        minL = LatLng(element.lat, element.lon);
+      if(lat > maxLat){
+        maxLat = lat;
       }
-      if(element.lon < min){
-        min = element.lat;
-        minL = LatLng(element.lat, element.lon);
+      if(lon < minLon){
+        minLon = lon;
       }
+      if(lon > maxLon){
+        maxLon = lon;
+      }
+    
     });
-    var latLng_Corner1 = LatLng(elem1.lat, elem1.lon);
-    var latLng_Corner2 = LatLng(elem2.lat, elem2.lon);
-    latLng_Corner1 = maxL!;
-    latLng_Corner2 = minL!;
+    var latLng_Corner1 = LatLng(minLat, minLon);
+    var latLng_Corner2 = LatLng(maxLat, maxLon);
 
     return (latLng_Corner1, latLng_Corner2);
   }
