@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../model/group_list.dart';
 import '../model/map_group_list.dart';
@@ -24,7 +25,8 @@ class PageListGroup extends StatelessWidget {
             Expanded(
               child: _ListView(
                 listgroup: listGroupTest,
-                selectListItem: (String id) => OnlyOneClick.oneClick(() =>_selectListItem(id, context)),
+                selectListItem: (String id) =>
+                    OnlyOneClick.oneClick(() => _selectListItem(id, context)),
               ),
             ),
           ],
@@ -113,7 +115,30 @@ class _ListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _reqestPermission();
     return _listView(listgroup);
+  }
+
+  void _reqestPermission() async {
+    try {
+      final locationStatus = await Permission.location.status;
+      if (locationStatus.isDenied) {
+        await Permission.location.request();
+      }
+      final locationAlwaysStatus = await Permission.locationAlways.status;
+      if (locationAlwaysStatus.isDenied) {
+        await Permission.locationAlways.request();
+      }
+      final locationWhenInUseStatus = await Permission.locationWhenInUse.status;
+      if (locationWhenInUseStatus.isDenied) {
+        await Permission.locationWhenInUse.request();
+      }
+      final appTrackingTransparencyStatus =
+          await Permission.appTrackingTransparency.status;
+      if (appTrackingTransparencyStatus.isDenied) {
+        await Permission.appTrackingTransparency.request();
+      }
+    } catch (e) {}
   }
 
   Widget _listView(List<GroupListItem>? listgroup) {
